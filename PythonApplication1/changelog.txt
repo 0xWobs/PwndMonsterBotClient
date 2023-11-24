@@ -1,0 +1,136 @@
+2023-11-20 13:27:32.995160, ADDING BRAWL POINTS FOR BRAWL CYCLE 187
+2023-11-20 13:27:33.782079, Successfully added new user Nwb071980 with initial point value 10.0
+2023-11-20 13:27:33.793048, Successfully added new user .demon19. with initial point value 8.0
+2023-11-20 13:27:33.802026, Successfully added new user anandkj611 with initial point value 6.0
+2023-11-20 13:27:33.811997, Successfully added new user .dben with initial point value 9.0
+2023-11-20 13:27:33.820974, Successfully added new user EM with initial point value 9.0
+2023-11-20 13:27:33.827955, Successfully added new user genesis_0624 with initial point value 5.0
+2023-11-20 13:27:33.834936, Successfully added new user valchiz with initial point value 5.0
+2023-11-20 13:27:33.843913, Successfully added new user zukito with initial point value 6.0
+2023-11-20 13:27:33.851892, Successfully added new user idkpdx with initial point value 7.0
+2023-11-20 13:27:33.861863, Successfully added new user thedarkgane with initial point value 4.0
+2023-11-20 13:27:33.870840, Successfully added new user jonnyutah52 with initial point value 4.0
+2023-11-20 13:27:33.879821, Successfully added new user SLG tub3r0 with initial point value 4.0
+2023-11-20 13:27:33.886798, Successfully added new user z1ddaxtobytaba with initial point value 4.0
+2023-11-20 13:27:33.896771, Successfully added new user gaudge with initial point value 6.0
+2023-11-20 13:27:33.905747, Successfully added new user wobs6817 with initial point value 5.0
+2023-11-20 13:27:33.915721, Successfully added new user _moertoe with initial point value 6.0
+2023-11-20 13:27:33.925693, Successfully added new user mxm with initial point value 6.0
+2023-11-20 13:27:33.934672, Successfully added new user lordwolfen with initial point value 6.0
+2023-11-20 13:28:03.749223, ADDING BRAWL POINTS FOR BRAWL CYCLE 186
+2023-11-20 13:28:04.481265, Successfully added 8.0 to jonnyutah52. Old value 4.0, new value 12.0
+2023-11-20 13:28:04.492232, Successfully added 8.0 to EM. Old value 9.0, new value 17.0
+2023-11-20 13:28:04.502205, Successfully added 7.0 to SLG tub3r0. Old value 4.0, new value 11.0
+2023-11-20 13:28:04.511182, Successfully added 6.0 to .demon19.. Old value 8.0, new value 14.0
+2023-11-20 13:28:04.520159, Successfully added new user colnelangus with initial point value 6.0
+2023-11-20 13:28:04.529133, Successfully added 8.0 to zukito. Old value 6.0, new value 14.0
+2023-11-20 13:28:04.537112, Successfully added 5.0 to valchiz. Old value 5.0, new value 10.0
+2023-11-20 13:28:04.547085, Successfully added 5.0 to genesis_0624. Old value 5.0, new value 10.0
+2023-11-20 13:28:04.557059, Successfully added 8.0 to .dben. Old value 9.0, new value 17.0
+2023-11-20 13:28:04.567035, Successfully added 10.0 to wobs6817. Old value 5.0, new value 15.0
+2023-11-20 13:28:04.576008, Successfully added 8.0 to idkpdx. Old value 7.0, new value 15.0
+2023-11-20 13:28:04.585981, Successfully added 5.0 to Nwb071980. Old value 10.0, new value 15.0
+2023-11-20 13:28:04.595954, Successfully added 11.0 to _moertoe. Old value 6.0, new value 17.0
+2023-11-20 13:28:04.602937, Successfully added 6.0 to gaudge. Old value 6.0, new value 12.0
+2023-11-20 13:28:04.613908, Successfully added 2.0 to thedarkgane. Old value 4.0, new value 6.0
+2023-11-20 13:28:04.621886, Successfully added 9.0 to lordwolfen. Old value 6.0, new value 15.0
+2023-11-20 13:28:04.631858, Successfully added 6.0 to mxm. Old value 6.0, new value 12.0
+2023-11-20 13:28:04.641833, Successfully added 1.0 to z1ddaxtobytaba. Old value 4.0, new value 5.0
+2023-11-20 13:37:01.953046, REMOVING BRAWL POINTS FOR BRAWL CYCLE 186
+2023-11-20 13:37:02.693246, Successfully added -8.0 to jonnyutah52. Old value 12.0, new value 4.0
+2023-11-20 13:37:02.700227, Successfully added -8.0 to EM. Old value 17.0, new value 9.0
+2023-11-20 13:37:02.711196, Successfully added -7.0 to SLG tub3r0. Old value 11.0, new value 4.0
+2023-11-20 13:37:02.721174, Successfully added -6.0 to .demon19.. Old value 14.0, new value 8.0
+2023-11-20 13:37:02.730152, Successfully added -6.0 to colnelangus. Old value 6.0, new value 0.0
+2023-11-20 13:37:02.741117, Successfully added -8.0 to zukito. Old value 14.0, new value 6.0
+2023-11-20 13:37:02.751090, Successfully added -5.0 to valchiz. Old value 10.0, new value 5.0
+2023-11-20 13:37:02.761063, Successfully added -5.0 to genesis_0624. Old value 10.0, new value 5.0
+2023-11-20 13:37:02.769048, Successfully added -8.0 to .dben. Old value 17.0, new value 9.0
+2023-11-20 13:37:02.776023, Successfully added -10.0 to wobs6817. Old value 15.0, new value 5.0
+2023-11-20 13:37:02.786993, Successfully added -8.0 to idkpdx. Old value 15.0, new value 7.0
+2023-11-20 13:37:02.792977, Successfully added -5.0 to Nwb071980. Old value 15.0, new value 10.0
+2023-11-20 13:37:02.799959, Successfully added -11.0 to _moertoe. Old value 17.0, new value 6.0
+2023-11-20 13:37:02.809932, Successfully added -6.0 to gaudge. Old value 12.0, new value 6.0
+2023-11-20 13:37:02.818911, Successfully added -2.0 to thedarkgane. Old value 6.0, new value 4.0
+2023-11-20 13:37:02.828883, Successfully added -9.0 to lordwolfen. Old value 15.0, new value 6.0
+2023-11-20 13:37:02.836862, Successfully added -6.0 to mxm. Old value 12.0, new value 6.0
+2023-11-20 13:37:02.846834, Successfully added -1.0 to z1ddaxtobytaba. Old value 5.0, new value 4.0
+2023-11-20 13:37:57.536054, ADDING BRAWL POINTS FOR BRAWL CYCLE 186
+2023-11-20 13:37:58.322972, Successfully added 8.0 to jonnyutah52. Old value 4.0, new value 12.0
+2023-11-20 13:37:58.332946, Successfully added 8.0 to EM. Old value 9.0, new value 17.0
+2023-11-20 13:37:58.341924, Successfully added 7.0 to SLG tub3r0. Old value 4.0, new value 11.0
+2023-11-20 13:37:58.351897, Successfully added 6.0 to .demon19.. Old value 8.0, new value 14.0
+2023-11-20 13:37:58.363866, Successfully added 6.0 to colnelangus. Old value 0.0, new value 6.0
+2023-11-20 13:37:58.366857, Successfully added 8.0 to zukito. Old value 6.0, new value 14.0
+2023-11-20 13:37:58.368851, Successfully added 5.0 to valchiz. Old value 5.0, new value 10.0
+2023-11-20 13:37:58.380818, Successfully added 5.0 to genesis_0624. Old value 5.0, new value 10.0
+2023-11-20 13:37:58.382813, Successfully added 8.0 to .dben. Old value 9.0, new value 17.0
+2023-11-20 13:37:58.385805, Successfully added 10.0 to wobs6817. Old value 5.0, new value 15.0
+2023-11-20 13:37:58.387799, Successfully added 8.0 to idkpdx. Old value 7.0, new value 15.0
+2023-11-20 13:37:58.389796, Successfully added 5.0 to Nwb071980. Old value 10.0, new value 15.0
+2023-11-20 13:37:58.391789, Successfully added 11.0 to _moertoe. Old value 6.0, new value 17.0
+2023-11-20 13:37:58.394781, Successfully added 6.0 to gaudge. Old value 6.0, new value 12.0
+2023-11-20 13:37:58.396776, Successfully added 2.0 to thedarkgane. Old value 4.0, new value 6.0
+2023-11-20 13:37:58.398770, Successfully added 9.0 to lordwolfen. Old value 6.0, new value 15.0
+2023-11-20 13:37:58.401761, Successfully added 6.0 to mxm. Old value 6.0, new value 12.0
+2023-11-20 13:37:58.403761, Successfully added 1.0 to z1ddaxtobytaba. Old value 4.0, new value 5.0
+2023-11-20 15:31:01.744944, ADDING BRAWL POINTS FOR BRAWL CYCLE 187
+2023-11-20 15:31:31.567704, ADDING BRAWL POINTS FOR BRAWL CYCLE 185
+2023-11-20 15:31:32.365577, Successfully added 10.0 to zukito. Old value 14.0, new value 24.0
+2023-11-20 15:31:32.377545, Successfully added 10.0 to .demon19.. Old value 14.0, new value 24.0
+2023-11-20 15:31:32.386523, Successfully added new user contactmike1 with initial point value 6.0
+2023-11-20 15:31:32.397492, Successfully added 6.0 to Nwb071980. Old value 15.0, new value 21.0
+2023-11-20 15:31:32.408463, Successfully added 5.0 to SLG tub3r0. Old value 11.0, new value 16.0
+2023-11-20 15:31:32.419433, Successfully added 5.0 to z1ddaxtobytaba. Old value 5.0, new value 10.0
+2023-11-20 15:31:32.430404, Successfully added new user mephisto_angel with initial point value 4.0
+2023-11-20 15:31:32.440377, Successfully added 5.0 to EM. Old value 17.0, new value 22.0
+2023-11-20 15:31:32.451347, Successfully added 4.0 to valchiz. Old value 10.0, new value 14.0
+2023-11-20 15:31:32.462321, Successfully added 4.0 to anandkj611. Old value 6.0, new value 10.0
+2023-11-20 15:31:32.473289, Successfully added 11.0 to _moertoe. Old value 17.0, new value 28.0
+2023-11-20 15:31:32.483263, Successfully added 6.0 to gaudge. Old value 12.0, new value 18.0
+2023-11-20 15:31:32.494233, Successfully added 6.0 to idkpdx. Old value 15.0, new value 21.0
+2023-11-20 15:31:32.505204, Successfully added 6.0 to wobs6817. Old value 15.0, new value 21.0
+2023-11-20 15:31:32.517171, Successfully added 4.0 to thedarkgane. Old value 6.0, new value 10.0
+2023-11-20 15:31:32.527490, Successfully added 8.0 to mxm. Old value 12.0, new value 20.0
+2023-11-20 15:31:32.537454, Successfully added 7.0 to lordwolfen. Old value 15.0, new value 22.0
+2023-11-20 15:31:32.548425, Successfully added 1.0 to jonnyutah52. Old value 12.0, new value 13.0
+2023-11-20 15:32:21.730826, REMOVING BRAWL POINTS FOR BRAWL CYCLE 185
+2023-11-20 15:33:05.822047, REMOVING BRAWL POINTS FOR BRAWL CYCLE 185
+2023-11-20 15:33:06.607993, Successfully added -10.0 to zukito. Old value 24.0, new value 14.0
+2023-11-20 15:33:06.616968, Successfully added -10.0 to .demon19.. Old value 24.0, new value 14.0
+2023-11-20 15:33:06.627940, Successfully added -6.0 to contactmike1. Old value 6.0, new value 0.0
+2023-11-20 15:33:06.634921, Successfully added -6.0 to Nwb071980. Old value 21.0, new value 15.0
+2023-11-20 15:33:06.644894, Successfully added -5.0 to SLG tub3r0. Old value 16.0, new value 11.0
+2023-11-20 15:33:06.654868, Successfully added -5.0 to z1ddaxtobytaba. Old value 10.0, new value 5.0
+2023-11-20 15:33:06.664842, Successfully added -4.0 to mephisto_angel. Old value 4.0, new value 0.0
+2023-11-20 15:33:06.674816, Successfully added -5.0 to EM. Old value 22.0, new value 17.0
+2023-11-20 15:33:06.685785, Successfully added -4.0 to valchiz. Old value 14.0, new value 10.0
+2023-11-20 15:33:06.696755, Successfully added -4.0 to anandkj611. Old value 10.0, new value 6.0
+2023-11-20 15:33:06.703737, Successfully added -11.0 to _moertoe. Old value 28.0, new value 17.0
+2023-11-20 15:33:06.712713, Successfully added -6.0 to gaudge. Old value 18.0, new value 12.0
+2023-11-20 15:33:06.722687, Successfully added -6.0 to idkpdx. Old value 21.0, new value 15.0
+2023-11-20 15:33:06.732661, Successfully added -6.0 to wobs6817. Old value 21.0, new value 15.0
+2023-11-20 15:33:06.741637, Successfully added -4.0 to thedarkgane. Old value 10.0, new value 6.0
+2023-11-20 15:33:06.751609, Successfully added -8.0 to mxm. Old value 20.0, new value 12.0
+2023-11-20 15:33:06.762580, Successfully added -7.0 to lordwolfen. Old value 22.0, new value 15.0
+2023-11-20 15:33:06.771555, Successfully added -1.0 to jonnyutah52. Old value 13.0, new value 12.0
+2023-11-22 05:27:43.433786, Successfully added -17 to .dben. Old value 17.0, new value 0.0
+2023-11-22 05:36:33.891720, ADDING BRAWL POINTS FOR BRAWL CYCLE 188
+2023-11-22 05:36:36.137791, Successfully added 7.0 to colnelangus. Old value 6.0, new value 13.0
+2023-11-22 05:36:36.149758, Successfully added 7.0 to EM. Old value 17.0, new value 24.0
+2023-11-22 05:36:36.159732, Successfully added new user hajime_001 with initial point value 5.0
+2023-11-22 05:36:36.170702, Successfully added 5.0 to zukito. Old value 14.0, new value 19.0
+2023-11-22 05:36:36.180675, Successfully added 8.0 to idkpdx. Old value 15.0, new value 23.0
+2023-11-22 05:36:36.194638, Successfully added 9.0 to lordwolfen. Old value 15.0, new value 24.0
+2023-11-22 05:36:36.204611, Successfully added 4.0 to SLG tub3r0. Old value 11.0, new value 15.0
+2023-11-22 05:36:36.216580, Successfully added 4.0 to genesis_0624. Old value 10.0, new value 14.0
+2023-11-22 05:36:36.226553, Successfully added 4.0 to z1ddaxtobytaba. Old value 5.0, new value 9.0
+2023-11-22 05:36:36.237524, Successfully added 4.0 to anandkj611. Old value 6.0, new value 10.0
+2023-11-22 05:36:36.252484, Successfully added 9.0 to wobs6817. Old value 15.0, new value 24.0
+2023-11-22 05:36:36.262457, Successfully added 4.0 to thedarkgane. Old value 6.0, new value 10.0
+2023-11-22 05:36:36.273427, Successfully added 7.0 to _moertoe. Old value 17.0, new value 24.0
+2023-11-22 05:36:36.283401, Successfully added 3.0 to Nwb071980. Old value 15.0, new value 18.0
+2023-11-22 05:36:36.294373, Successfully added 4.0 to gaudge. Old value 12.0, new value 16.0
+2023-11-22 05:36:36.305344, Successfully added 6.0 to mxm. Old value 12.0, new value 18.0
+2023-11-22 05:36:36.316314, Successfully added 1.0 to valchiz. Old value 10.0, new value 11.0
+2023-11-22 05:36:36.326286, Successfully added 1.0 to .dben. Old value 0.0, new value 1.0
