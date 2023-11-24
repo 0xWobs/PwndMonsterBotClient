@@ -10,6 +10,7 @@ from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN') #app token
+CHANNEL = os.getenv('CHANNEL_NAME') #channel name to interact with the bot
 R_ACTIVE = os.getenv('REWARD_ACCOUNT_ACTIVE_KEY') #reward account active key for auto-reward distribution
 R_POSTING = os.getenv('REWARD_ACCOUNT_POSTING_KEY') #reward accont posting key for auto-reward distribution
 
@@ -33,7 +34,7 @@ async def on_ready(): #this method happens upon initialization of the bot
 async def on_message(message): #occurs when a new message is typed
     if message.author == bot.user:
         return #if bot is seeing its own message, ignore
-    if message.channel.name != 'pwnd-bot':
+    if message.channel.name != CHANNEL:
         return #if message is NOT in "pwnd-bot" channel, ignore
     if message.content == 'ping':
         await message.channel.send('pong - on_message')
