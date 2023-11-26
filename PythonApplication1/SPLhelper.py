@@ -2,6 +2,7 @@ import json
 import requests
 import random
 import string
+import os
 import discord
 from beem.transactionbuilder import TransactionBuilder
 from beembase.operations import Custom_json
@@ -48,27 +49,40 @@ def recordBrawl(ctx, cycle, toAdd):
     return '\n'.join(output) #returns the messages back, one line per user
 
 def calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl, cycle, toAdd):
+    memo = name
     if battles_entered == 0:
         idk = ign_d['idkpdx']
         return f'User {ign_d[name]} did NOT enter battles for brawl cycle {cycle}. {idk}'
     total = 0
     #current algorithm = 1 point per win and half point for draws
     total = total + wins
-    total = total + (0.5*draws)
+    memo = f'{memo} +{wins} for wins,'
+    if draws > 0:
+        total = total + (0.5*draws)
+        memo = f'{memo} +{draws} for draws (half points),'
+    
     #3 bonus points for 0 losses, 1 bonus point for 1 loss
     if losses == 0:
         total = total + 3
+        memo = f'{memo} +3 for no losses,'
     elif losses == 1:
         total = total + 1
+        memo = f'{memo} +1 for only 1 loss,'
     #bonus points for tougher fray assignemnts
+    fray_bonus = 0
     if brawl == 6:
-        total = total + tier3_bonus[str(fray)]
+        fray_bonus = tier3_bonus[str(fray)]        
     elif brawl == 8:
         #TODO need to check this!! not sure this is corrrect
-        total = total + tier4_bonus[str(fray)]
+        fray_bonus = tier4_bonus[str(fray)]
     else:
         #todo??
         return f'HELP not sure what to do here, unexpected brawl value in calculatePoints {brawl}'
+    total = total + fray_bonus
+    memo = f'{memo} and +{fray_bonus} for fray difficulty. +{total} total.'
     if toAdd == False:
         total = total * -1 #if needed to delete points from a brawl added erroniously or doubled then do so here
-    return(add_points(ctx,ign_d[name],total))
+    else:
+        y = 3
+        #message_splicer_sender(ctx,memo) #send log line to illustrate how points were calculated
+    return(add_points(ctx,ign_d[name],total,memo))

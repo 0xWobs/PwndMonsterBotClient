@@ -81,7 +81,7 @@ async def change_Log_Name_N(ctx, user: str, lines: int):
 @commands.has_role('Officers')
 async def add_Points(ctx,user: str, points: int):
     # this one should always only be 1 line, dont need splicer method here
-    await ctx.send(add_points(ctx, user, points)) # calls helper function, should return string
+    await ctx.send(add_points(ctx, user, points,'')) # calls helper function, should return string
 
 @bot.command(name="ping", help='{} Heartbeat to verify if the bot is running correctly.')
 async def ping(ctx):

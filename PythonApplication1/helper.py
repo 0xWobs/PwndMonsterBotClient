@@ -12,12 +12,15 @@ l_file = 'changelog.txt'
 #ctx context object
 #user is discord user tag '<@346523452345>'
 #points is int points to be added (neg for subtract)
-def add_points(ctx, user, points):
+#memo is a note to add as a first line in the output message. if blank, ignore
+def add_points(ctx, user, points, memo):
+    if memo != '':
+        memo = f'{memo}\n'
     if points == 0:
-        return(f'Did not add or modify any points. Point value 0.')
+        return(f'{memo}Did not add or modify any points. Point value 0.')
     name = grab_user_name(ctx, user)
     if name == '-1':
-        return(f'Could not locate username {user} in the guild. Nothing changed.')
+        return(f'{memo}Could not locate username {user} in the guild. Nothing changed.')
     #check to see if user exists
     if user_exist(name):
         old_points=0
@@ -34,13 +37,13 @@ def add_points(ctx, user, points):
                 newLines.append(l)
         with open(b_file,'w') as file:
             file.writelines(newLines) #rewrite the new values and old values to file
-        return (log(f'Successfully added {points} to {name}. Old value {old_points}, new value {new_points}'))
+        return (log(f'{memo}Successfully added {points} to {name}. Old value {old_points}, new value {new_points}'))
     else:
         #add user and points to end of the file
         with open(b_file,'a') as file:
             file.write(f'{name},{points}\n')
-        return (log(f'Successfully added new user {name} with initial point value {points}'))
-    return (log(f'Failed to add points. Should not get here. {user} {points}'))
+        return (log(f'{memo}Successfully added new user {name} with initial point value {points}'))
+    return (log(f'{memo}Failed to add points. Should not get here. {user} {points}'))
 
 # returns the entire balances.txt file as a string
 def display_points_all():
