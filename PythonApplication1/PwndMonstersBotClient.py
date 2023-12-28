@@ -45,13 +45,19 @@ async def on_message(message): #occurs when a new message is typed
 async def add_Brawl(ctx, cycle: int):
     log(f'ADDING BRAWL POINTS FOR BRAWL CYCLE {cycle}')
     await message_splicer_sender(ctx, recordBrawl(ctx, cycle, True)) #function, should return string
-    # await ctx.send(recordBrawl(ctx, cycle, True)) 
+    updateBrawlCycleNumber(cycle)
 
 @bot.command(name="remove_Brawl", help='*** {cycle} - Subtract the brawl results and tally points for given brawl cycle.  (***Officers only)')
 @commands.has_role('Officers')
 async def remove_Brawl(ctx, cycle: int):
     log(f'REMOVING BRAWL POINTS FOR BRAWL CYCLE {cycle}')
     await message_splicer_sender(ctx, recordBrawl(ctx, cycle, False)) #function, should return string
+    # await ctx.send(recordBrawl(ctx, cycle, False)) 
+
+@bot.command(name="check_Brawl", help='*** - Return the most recent brawl cycle added.  (***Officers only)')
+@commands.has_role('Officers')
+async def check_Brawl(ctx):
+    await message_splicer_sender(ctx, checkBrawl(ctx)) #function, should return string
     # await ctx.send(recordBrawl(ctx, cycle, False)) 
 
 @bot.command(name="change_Log", help='*** {} - Show the last 99 lines from the changelog. (***Officers only)')
