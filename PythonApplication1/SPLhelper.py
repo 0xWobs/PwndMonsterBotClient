@@ -50,7 +50,7 @@ def recordBrawl(ctx, cycle, toAdd):
 
 def calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl, cycle, toAdd):
     memo = name
-    if battles_entered == 0:
+    if battles_entered == 0: #TODO, this does not work and will never trigger. even with surrenders battles entered will match how many battles there were
         idk = ign_d['idkpdx']
         return f'User {ign_d[name]} did NOT enter battles for brawl cycle {cycle}. {idk}'
     total = 0
@@ -78,11 +78,22 @@ def calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl
     else:
         #todo??
         return f'HELP not sure what to do here, unexpected brawl value in calculatePoints {brawl}'
-    total = total + fray_bonus
-    memo = f'{memo} and +{fray_bonus} for fray difficulty. +{total} total.'
+
+    #adding condition to fray bonus algorithm - user must win at least 1 battle to earn fray bonus.  assuming more than 2 battles possible, 0/1, and 0/2 still earns fray difficulty bonus but above that requires at least 1 win.
+    if battles_entered > 2:
+        # more than 2 battles, must have at least 1/3 or better to earn fray bonus
+        if wins > 0:
+            total = total + fray_bonus
+            memo = f'{memo} and +{fray_bonus} for fray difficulty. +{total} total.'
+        else:   
+            #fray bonus lost, no wins.
+            memo = f'{memo} and +0 for fray difficulty(no wins). +{total} total.'
+    else:
+        #less than 2 battles, ignore extra condition
+        total = total + fray_bonus
+        memo = f'{memo} and +{fray_bonus} for fray difficulty. +{total} total.'
+
     if toAdd == False:
         total = total * -1 #if needed to delete points from a brawl added erroniously or doubled then do so here
-    else:
-        y = 3
-        #message_splicer_sender(ctx,memo) #send log line to illustrate how points were calculated
+
     return(add_points(ctx,ign_d[name],total,memo))
