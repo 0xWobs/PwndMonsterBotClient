@@ -6,6 +6,7 @@ import datetime
 from dictionaries import ign_d
 from dictionaries import d_ign
 BRAWL_CYCLE_NAME = 'BRAWL_CYCLE' #name added to the balances file to track the brawl cycle numbers
+POINT_CEILING = 100
 b_file = 'balances.txt'
 l_file = 'changelog.txt'
 
@@ -15,6 +16,10 @@ l_file = 'changelog.txt'
 #points is int points to be added (neg for subtract)
 #memo is a note to add as a first line in the output message. if blank, ignore
 def add_points(ctx, user, points, memo):
+    ceiling_hit = False
+    if points > POINT_CEILING:
+        points = POINT_CEILING
+        ceiling_hit = True
     if memo != '':
         memo = f'{memo}\n'
     if points == 0:
@@ -33,17 +38,26 @@ def add_points(ctx, user, points, memo):
                 x = l.split(',')
                 old_points = float(x[1])
                 new_points = old_points+points
+                if new_points > POINT_CEILING:
+                    new_points = POINT_CEILING
+                    ceiling_hit = True
                 newLines.append(f'{name},{new_points}\n') #overwrite correct line with new point value
             else:
                 newLines.append(l)
         with open(b_file,'w') as file:
             file.writelines(newLines) #rewrite the new values and old values to file
-        return (log(f'{memo}Successfully added {points} to {name}. Old value {old_points}, new value {new_points}'))
+        if ceiling_hit:
+            return (log(f'{memo}Successfully added {points} to {name}. Old value {old_points}, new value {new_points}. You are maxed out {user}! Go buy something!'))
+        else:
+            return (log(f'{memo}Successfully added {points} to {name}. Old value {old_points}, new value {new_points}'))
     else:
         #add user and points to end of the file
         with open(b_file,'a') as file:
             file.write(f'{name},{points}\n')
-        return (log(f'{memo}Successfully added new user {name} with initial point value {points}'))
+        if ceiling_hit:
+            return (log(f'{memo}Successfully added new user {name} with initial point value {points}. You are maxed out {user}! Go buy something!'))
+        else:
+            return (log(f'{memo}Successfully added new user {name} with initial point value {points}'))
     return (log(f'{memo}Failed to add points. Should not get here. {user} {points}'))
 
 # returns the entire balances.txt file as a string
