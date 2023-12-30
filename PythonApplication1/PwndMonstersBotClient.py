@@ -11,8 +11,16 @@ from discord.ext import commands
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN') #app token
 CHANNEL = os.getenv('CHANNEL_NAME') #channel name to interact with the bot
+R_NAME = 'wobs4'
 R_ACTIVE = os.getenv('REWARD_ACCOUNT_ACTIVE_KEY') #reward account active key for auto-reward distribution
 R_POSTING = os.getenv('REWARD_ACCOUNT_POSTING_KEY') #reward accont posting key for auto-reward distribution
+
+BUY_REBELLION_POINTS = 50 #cost in points
+BUY_REBELLION_TOKENS = 1 #tokens earned for the points
+BUY_SPS_POINTS = 25 # point cost to purchase sps
+BUY_SPS_TOKENS = 40 #sps earned 
+BUY_DEC_POINTS = 15 #point cost to purchase dec
+BUY_DEC_TOKENS = 1000 #tokens earned for the points
 
 intents = discord.Intents.default()
 intents.members = True
@@ -106,10 +114,40 @@ async def display_name(ctx, user):
     # this one should always only be 1 line, dont need splicer method here
     await ctx.send(display_points(ctx, user))
 
+@bot.command(name='display_Rewards', help='{} Displays currently available rewards in the rewards account for purchase.')
+async def display_rewards(ctx):
+    # this one should always only be 1 line, dont need splicer method here
+    await message_splicer_sender(ctx, printAccountBalances(R_NAME))
+
+@bot.command(name='display_Prices', help='{} Displays costs and rewards available for purchase.')
+async def display_rewards(ctx):
+    # this one should always only be 1 line, dont need splicer method here
+    o1 = f'Reward account has the following rewards available:\n'
+    o2 = printAccountBalances(R_NAME) + '\n'
+    o3 = f'Rebellion Packs cost {BUY_REBELLION_POINTS} points for {BUY_REBELLION_TOKENS} {tknRebellionPacks[1]}\n'
+    o4 = f'SPS tokens cost {BUY_SPS_POINTS} points for {BUY_SPS_TOKENS} {tknSPS[1]}\n'
+    o5 = f'DEC tokens cost {BUY_DEC_POINTS} points for {BUY_DEC_TOKENS} {tknDEC[1]}\n'
+    await message_splicer_sender(ctx,o1+o2+o3+o4+o5)
+
+@bot.command(name='buy_Rebellion', help='{} Purchase a Rebellion pack with points.')
+async def buy_Rebellion(ctx):
+    discordName = ctx.author.name
+    await message_splicer_sender(ctx, purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_REBELLION_POINTS, tknRebellionPacks[0], BUY_REBELLION_TOKENS))
+
+@bot.command(name='buy_SPS', help='{} Purchase SPS with points.')
+async def buy_SPS(ctx):
+    discordName = ctx.author.name
+    await message_splicer_sender(ctx, purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_SPS_POINTS, tknSPS[0], BUY_SPS_TOKENS))
+
+@bot.command(name='buy_DEC', help='{} Purchase DEC with points.')
+async def buy_SPS(ctx):
+    discordName = ctx.author.name
+    await message_splicer_sender(ctx, purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_DEC_POINTS, tknDEC[0], BUY_DEC_TOKENS))
+
 #split lines of a message up into chunks of 18 lines each.
 async def message_splicer_sender(ctx, msg):
     lines = msg.split('\n')
-    limit = 18
+    limit = 10
     if len(lines) < limit:
         await ctx.send(msg)
     else:

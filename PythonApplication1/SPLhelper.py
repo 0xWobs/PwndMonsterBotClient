@@ -12,6 +12,13 @@ from dictionaries import d_ign
 from dictionaries import tier3_bonus
 from dictionaries import tier4_bonus
 
+tknChaosPacks = ("CHAOS", "Chaos Packs") # Chaos Legion card packs
+tknRiftWatcherPacks = ("RIFT", "RiftWatcher Packs") # Riftwatchers packs
+tknRebellionPacks = ("REBELLION", "Rebellion Packs") # Rebellion edition packs
+tknDEC = ("DEC", "DEC tokens") # Dark Energy Crystals
+tknSPS = ("SPS", "SPS tokens") # SPS in game account, liquid
+
+
 pwndID = 'c43af991dc15970e2047548f5b7bfc30a9943543'
 #this file is to put Splinterlands API calls and interactions here
 
@@ -97,3 +104,92 @@ def calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl
         total = total * -1 #if needed to delete points from a brawl added erroniously or doubled then do so here
 
     return(add_points(ctx,ign_d[name],total,memo))
+
+#generic method to handle point deduction and token transfer for any purchases
+#ctx - the discord context
+#rewName - the SPL account name of the reward account to withdraw from
+#rewActive - the SPL Active Key for the rewName account
+#discordName - the discord member name
+#splName - the SPL account name to send the rewards to
+#pointSpent - the amount of points to deduct from the receiver
+#tokenName - the SPL token name 
+#tokenAmount - the SPL token amount to send
+def purchaseToken(ctx, rewName, rewActive, discordName, splName, pointSpent, tokenName, tokenAmount):
+    # check user Points Available
+    userPoints = get_User_Points(ctx, discordName)
+    if userPoints < pointSpent:
+        return f'User {discordName} does not have enough points available to purchase {tokenName}. You have {userPoints}, you need {pointSpent} for this purchase. No changes made.'
+
+    # check reward account Tokens available
+    rewTokens = getTokenAmount(rewName, tokenName)
+    if rewTokens == None:
+        return f'Problem getting token balances. Please try again. No changes made.'
+    if rewTokens < tokenAmount:
+        o1 = f'Reward account does not have enough {tokenName} for this purchase.  Choose something else or ask the Officers for help. Rewards available:'
+        o2 = printAccountBalances(rewName)
+        return f'{o1}\n{o2}'
+
+    # if both checks passed, proceed with purchase.
+    output = add_points(ctx, discordName, pointSpent *-1, f'{discordName} is purchasing {tokenName} with {pointSpent} points.')
+    output2 = tokenTransfer(rewName, rewActive, splName, tokenName, tokenAmount)
+    return f'{output}\n{output2}'
+
+# return a single int value from the balance token; return -1 if not found
+def getTokenAmount(accName, tokenName):
+    try:
+        r = requests.get('https://api.splinterlands.io/players/balances?username='+accName)
+        jsonData = json.loads(r.text)
+        for item in jsonData:
+            if item["token"]==tokenName:
+                return round(item["balance"],3)
+        print("could not find token: " + tokenName + " from account: " + accName)
+        return -1
+    except Exception as e:
+        print("ERROR occured getting account balance in GetTokenAmount.")
+        print(e)
+        return
+
+# print important collection of acocunt balances
+# important things currently defined as DEC, SPS and Voucher
+def printAccountBalances(accName):
+    tokenList = {tknDEC, tknSPS, tknRebellionPacks}
+    return printAccountBalancesTokenList(accName,tokenList)
+
+#token is token type tuple [0] dict name [1] readable name
+def printAccountBalancesTokenList(accName, tokenList):
+    try:
+        r = requests.get('https://api.splinterlands.io/players/balances?username='+accName)
+        jsonData = json.loads(r.text)
+
+        output = ""
+        for token in tokenList:
+            for item in jsonData:
+                if item["token"]==token[0]:
+                    output = output + "Account " + accName + " has " + str(round(item["balance"],3)) + " " + token[1] + "\n"
+                    break # end the loop
+        return output
+    except Exception as e:
+        return "ERROR occured getting account balance.\r\n" + e
+    #code
+
+# generic function to initiate a token transfer, should work for any token type
+def tokenTransfer(accFrom, accFromActiveKey, accTo, tokenName, tokenQuantity):
+    tx = TransactionBuilder()
+    payload = {"to":accTo,"qty":round(tokenQuantity,3),"token":tokenName,"n":nString(),"app":"splinterlands/0.7.139"} #will this version need updating???
+    new_json = {
+            "required_auths": [accFrom],
+            "required_posting_auths": [],
+            "id": "sm_token_transfer",
+            "json": payload
+        }
+    tx.appendOps(Custom_json(new_json))
+    tx.appendWif(accFromActiveKey)
+    tx.sign()
+    tx.broadcast()
+    return f'Successfully broadcast transaction from {accFrom} to {accTo} of {tokenQuantity} {tokenName} token(s).'
+
+# method to return the "n" string argument
+def nString():
+    r = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(8))
+    return r
+    #return str("\"" + r + "\"")

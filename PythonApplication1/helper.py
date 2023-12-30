@@ -21,9 +21,10 @@ def add_points(ctx, user, points, memo):
         points = POINT_CEILING
         ceiling_hit = True
     if memo != '':
-        memo = f'{memo}\n'
+        memo = f'{memo} '
     if points == 0:
         return(f'{memo}Did not add or modify any points. Point value 0.')
+
     name = grab_user_name(ctx, user)
     if name == '-1':
         return(f'{memo}Could not locate username {user} in the guild. Nothing changed.')
@@ -60,6 +61,12 @@ def add_points(ctx, user, points, memo):
             return (log(f'{memo}Successfully added new user {name} with initial point value {points}'))
     return (log(f'{memo}Failed to add points. Should not get here. {user} {points}'))
 
+def check_User_Points_Balance(ctx, name, pointsRequested):
+    userPoints = get_User_Points(ctx, name)
+    if userPoints >= pointsRequested:
+        return True
+    return False
+
 # returns the entire balances.txt file as a string
 def display_points_all():
     output = ''
@@ -71,16 +78,26 @@ def display_points_all():
             output = output + (f'{ign} has {point} points.\n')
         return output
 
-# returns a specific users points value
-def display_points(ctx, user):
+#returns a specific users point value from the file
+def get_User_Points(ctx, user):
     name = grab_user_name(ctx, user)
     with open(b_file) as f:
          for line in f.readlines():
              if name in line:
-                 ign = swap_discord_name_for_ign(name)
-                 point = line.replace('\n','').split(',')[1]
-                 return f'{ign} has {point} points.'
-    return (f'Could not find {name} in the balances file.')
+                 return (float)(line.replace('\n','').split(',')[1])
+    return -1
+
+
+# returns a specific users points value
+def display_points(ctx, user):
+    point = get_User_Points(ctx,user)
+    if point < 0:
+        return (f'Could not find {name} in the balances file.')
+    else:
+        name = grab_user_name(ctx, user)
+        ign = swap_discord_name_for_ign(name)
+        return f'{ign} has {point} points.'
+    
 
 #display lines number of lines from the change log
 def display_log(lines):
@@ -170,9 +187,14 @@ def user_exist(user):
 
 #helper function to grab the user's NAME from the context using the discord tag
 def grab_user_name(ctx, user):
-    for m in ctx.guild.members:
-        if str(m.id) in user:
-            return m.name
+    #if the name is already the user name in the file, do nothing
+    if user_exist(user):
+        return user
+    else:
+        #if the name is the discord id, pull the discord name 
+        for m in ctx.guild.members:
+            if str(m.id) in user:
+                return m.name
     return '-1'
 
 #helper function to switch from the discord name to the in game name
