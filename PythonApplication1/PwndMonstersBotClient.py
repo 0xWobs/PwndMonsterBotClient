@@ -11,7 +11,7 @@ from discord.ext import commands
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN') #app token
 CHANNEL = os.getenv('CHANNEL_NAME') #channel name to interact with the bot
-R_NAME = 'wobs4'
+R_NAME = os.getenv('REWARD_ACCOUNT_SPL_NAME')
 R_ACTIVE = os.getenv('REWARD_ACCOUNT_ACTIVE_KEY') #reward account active key for auto-reward distribution
 R_POSTING = os.getenv('REWARD_ACCOUNT_POSTING_KEY') #reward accont posting key for auto-reward distribution
 

@@ -13,14 +13,14 @@ from dictionaries import d_ign
 from dictionaries import tier3_bonus
 from dictionaries import tier4_bonus
 
-tknChaosPacks = ("CHAOS", "Chaos Packs") # Chaos Legion card packs
-tknRiftWatcherPacks = ("RIFT", "RiftWatcher Packs") # Riftwatchers packs
-tknRebellionPacks = ("REBELLION", "Rebellion Packs") # Rebellion edition packs
-tknDEC = ("DEC", "DEC tokens") # Dark Energy Crystals
-tknSPS = ("SPS", "SPS tokens") # SPS in game account, liquid
+tknChaosPacks = ("CHAOS", "Chaos Pack(s)") # Chaos Legion card packs
+tknRiftWatcherPacks = ("RIFT", "RiftWatcher Pack(s)") # Riftwatchers packs
+tknRebellionPacks = ("REBELLION", "Rebellion Pack(s)") # Rebellion edition packs
+tknDEC = ("DEC", "DEC token(s)") # Dark Energy Crystals
+tknSPS = ("SPS", "SPS token(s)") # SPS in game account, liquid
 
+pwndID = 'c43af991dc15970e2047548f5b7bfc30a9943543' #guild ID from splinterlands API, should this be in a flat file?
 
-pwndID = 'c43af991dc15970e2047548f5b7bfc30a9943543'
 #this file is to put Splinterlands API calls and interactions here
 
 #Add Brawl Data To Users
