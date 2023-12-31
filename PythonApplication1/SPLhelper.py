@@ -4,6 +4,7 @@ import random
 import string
 import os
 import discord
+import asyncio
 from beem.transactionbuilder import TransactionBuilder
 from beembase.operations import Custom_json
 from helper import *
@@ -104,35 +105,6 @@ def calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl
         total = total * -1 #if needed to delete points from a brawl added erroniously or doubled then do so here
 
     return(add_points(ctx,ign_d[name],total,memo))
-
-#generic method to handle point deduction and token transfer for any purchases
-#ctx - the discord context
-#rewName - the SPL account name of the reward account to withdraw from
-#rewActive - the SPL Active Key for the rewName account
-#discordName - the discord member name
-#splName - the SPL account name to send the rewards to
-#pointSpent - the amount of points to deduct from the receiver
-#tokenName - the SPL token name 
-#tokenAmount - the SPL token amount to send
-def purchaseToken(ctx, rewName, rewActive, discordName, splName, pointSpent, tokenName, tokenAmount):
-    # check user Points Available
-    userPoints = get_User_Points(ctx, discordName)
-    if userPoints < pointSpent:
-        return f'User {discordName} does not have enough points available to purchase {tokenName}. You have {userPoints}, you need {pointSpent} for this purchase. No changes made.'
-
-    # check reward account Tokens available
-    rewTokens = getTokenAmount(rewName, tokenName)
-    if rewTokens == None:
-        return f'Problem getting token balances. Please try again. No changes made.'
-    if rewTokens < tokenAmount:
-        o1 = f'Reward account does not have enough {tokenName} for this purchase.  Choose something else or ask the Officers for help. Rewards available:'
-        o2 = printAccountBalances(rewName)
-        return f'{o1}\n{o2}'
-
-    # if both checks passed, proceed with purchase.
-    output = add_points(ctx, discordName, pointSpent *-1, f'{discordName} is purchasing {tokenName} with {pointSpent} points.')
-    output2 = tokenTransfer(rewName, rewActive, splName, tokenName, tokenAmount)
-    return f'{output}\n{output2}'
 
 # return a single int value from the balance token; return -1 if not found
 def getTokenAmount(accName, tokenName):

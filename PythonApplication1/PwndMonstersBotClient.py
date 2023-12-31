@@ -68,25 +68,25 @@ async def check_Brawl(ctx):
     await message_splicer_sender(ctx, checkBrawl(ctx)) #function, should return string
     # await ctx.send(recordBrawl(ctx, cycle, False)) 
 
-@bot.command(name="change_Log", help='*** {} - Show the last 99 lines from the changelog. (***Officers only)')
-@commands.has_role('Officers')
+@bot.command(name="change_Log", help='{} - Show the last 99 lines from the changelog. (***Officers only)')
+#@commands.has_role('Officers')
 async def change_Log(ctx):
     await message_splicer_sender(ctx,display_log(99)) # calls helper function, should return string
     #await ctx.send(display_log(99)) 
 
-@bot.command(name="change_Log_N", help='*** {num} - Show the last N lines from the changelog. (***Officers only)')
-@commands.has_role('Officers')
+@bot.command(name="change_Log_N", help='{num} - Show the last N lines from the changelog. (***Officers only)')
+#@commands.has_role('Officers')
 async def change_Log_N(ctx, lines: int):
     await message_splicer_sender(ctx, display_log(lines)) # calls helper function, should return string
     #await ctx.send(display_log(lines)) 
 
-@bot.command(name="change_Log_Name", help='*** {@name} - Show the last 99 lines from the changelog for specific user. (***Officers only)')
-@commands.has_role('Officers')
+@bot.command(name="change_Log_Name", help='{@name} - Show the last 99 lines from the changelog for specific user. (***Officers only)')
+#@commands.has_role('Officers')
 async def change_Log_Name(ctx, user: str):
     await message_splicer_sender(ctx,display_log_user(ctx, user, 99)) # calls helper function, should return string
 
-@bot.command(name="change_Log_Name_N", help='*** {@name, num} - Show the last N lines from the changelog for specific user. (***Officers only)')
-@commands.has_role('Officers')
+@bot.command(name="change_Log_Name_N", help='{@name, num} - Show the last N lines from the changelog for specific user. (***Officers only)')
+#@commands.has_role('Officers')
 async def change_Log_Name_N(ctx, user: str, lines: int):
     await message_splicer_sender(ctx,display_log_user(ctx, user, lines)) # calls helper function, should return string
     #await ctx.send(display_log_user(ctx, user, lines)) 
@@ -97,12 +97,38 @@ async def add_Points(ctx,user: str, points: int):
     # this one should always only be 1 line, dont need splicer method here
     await ctx.send(add_points(ctx, user, points,'')) # calls helper function, should return string
 
-@bot.command(name="ping", help='{} Heartbeat to verify if the bot is running correctly.')
+@bot.command(name="ping", help='{} Heartbeat to verify if the bot is running.')
 async def ping(ctx):
     #user = '<@876552577079197727>'
     #await ctx.send(f'pong for {user}')
     #await ctx.send('pong for <@1175587765203767317>')
     await ctx.send('pong')
+
+    #this works too
+    #await ctx.send('type yes up for pong')
+    #def check(m):
+    #    return m.author == ctx.author
+    #try:
+    #    msg = await bot.wait_for('message', timeout=5.0, check=check)
+    #    if msg.content == 'yes':
+    #        await ctx.send('pong')
+    #    else:
+    #        await ctx.send('failure')
+    #except asyncio.TimeoutError:
+    #    await ctx.send('Timeout, no response')
+
+
+    #this works 
+    #await ctx.send('thumbs up for pong')
+    #def check(reaction, user):
+    #    return user == ctx.author and str(reaction.emoji) == '👍'
+    #try:
+    #    reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
+    #except asyncio.TimeoutError:
+    #    await ctx.send('👎')
+    #else:
+    #    await ctx.send('👍')
+    
 
 @bot.command(name='display_All', help='{} Displays the current points table.')
 async def display_all(ctx):
@@ -132,20 +158,63 @@ async def display_rewards(ctx):
 @bot.command(name='buy_Rebellion', help='{} Purchase a Rebellion pack with points.')
 async def buy_Rebellion(ctx):
     discordName = ctx.author.name
-    await message_splicer_sender(ctx, purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_REBELLION_POINTS, tknRebellionPacks[0], BUY_REBELLION_TOKENS))
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_REBELLION_POINTS, tknRebellionPacks[0], BUY_REBELLION_TOKENS))
 
 @bot.command(name='buy_SPS', help='{} Purchase SPS with points.')
 async def buy_SPS(ctx):
     discordName = ctx.author.name
-    await message_splicer_sender(ctx, purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_SPS_POINTS, tknSPS[0], BUY_SPS_TOKENS))
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_SPS_POINTS, tknSPS[0], BUY_SPS_TOKENS))
 
 @bot.command(name='buy_DEC', help='{} Purchase DEC with points.')
-async def buy_SPS(ctx):
+async def buy_DEC(ctx):
     discordName = ctx.author.name
-    await message_splicer_sender(ctx, purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_DEC_POINTS, tknDEC[0], BUY_DEC_TOKENS))
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_DEC_POINTS, tknDEC[0], BUY_DEC_TOKENS)) 
+
+#generic method to handle point deduction and token transfer for any purchases
+#ctx - the discord context
+#rewName - the SPL account name of the reward account to withdraw from
+#rewActive - the SPL Active Key for the rewName account
+#discordName - the discord member name
+#splName - the SPL account name to send the rewards to
+#pointSpent - the amount of points to deduct from the receiver
+#tokenName - the SPL token name 
+#tokenAmount - the SPL token amount to send
+async def purchaseToken(ctx, rewName, rewActive, discordName, splName, pointSpent, tokenName, tokenAmount):
+    # check user Points Available
+    userPoints = get_User_Points(ctx, discordName)
+    if userPoints < pointSpent:
+        return f'User {discordName} does not have enough points available to purchase {tokenName}. You have {userPoints}, you need {pointSpent} for this purchase. No changes made.'
+
+    # check reward account Tokens available
+    rewTokens = getTokenAmount(rewName, tokenName)
+    if rewTokens == None:
+        return f'Problem getting token balances. Please try again. No changes made.'
+    if rewTokens < tokenAmount:
+        o1 = f'Reward account does not have enough {tokenName} for this purchase.  Choose something else or ask the Officers for help. Rewards available:'
+        o2 = printAccountBalances(rewName)
+        return f'{o1}\n{o2}'
+
+    # if both checks passed, proceed with purchase.
+    await ctx.send(f'{discordName} is spending  {pointSpent} points to send {tokenAmount} {tokenName} to Splinterlands account: {splName}\nType "yes" to confirm.\nType anything else, or wait 20 seconds, to cancel.')
+    def check(m):
+        return m.author == ctx.author #inline function to make sure no OTHER user can interrupt the purchase
+    try:
+        msg = await bot.wait_for('message', timeout=20.0, check=check)
+        if msg.content == 'yes':
+            #confirmation received, deduct points and broadcast transaction
+            output = add_points(ctx, discordName, pointSpent *-1, f'{discordName} is purchasing {tokenName} with {pointSpent} points.')
+            output2 = tokenTransfer(rewName, rewActive, splName, tokenName, tokenAmount)
+            return f'{output}\n{output2}' # return 
+        else:
+            #user typed "no" or anything else that is not exactly "yes"
+            await ctx.send(f'{discordName} transaction canceled. No changes made.')
+    except asyncio.TimeoutError:
+        await ctx.send(f'{discordName} transaction timeout. No changes made.')
 
 #split lines of a message up into chunks of 18 lines each.
 async def message_splicer_sender(ctx, msg):
+    if msg == None:
+        return
     lines = msg.split('\n')
     limit = 10
     if len(lines) < limit:
