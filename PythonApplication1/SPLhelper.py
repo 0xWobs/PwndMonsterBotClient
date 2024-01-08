@@ -124,7 +124,7 @@ def getTokenAmount(accName, tokenName):
 # print important collection of acocunt balances
 # important things currently defined as DEC, SPS and Voucher
 def printAccountBalances(accName):
-    tokenList = {tknDEC, tknSPS, tknRebellionPacks}
+    tokenList = {tknDEC, tknSPS, tknRebellionPacks, tknChaosPacks}
     return printAccountBalancesTokenList(accName,tokenList)
 
 #token is token type tuple [0] dict name [1] readable name

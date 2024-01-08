@@ -15,12 +15,15 @@ R_NAME = os.getenv('REWARD_ACCOUNT_SPL_NAME')
 R_ACTIVE = os.getenv('REWARD_ACCOUNT_ACTIVE_KEY') #reward account active key for auto-reward distribution
 R_POSTING = os.getenv('REWARD_ACCOUNT_POSTING_KEY') #reward accont posting key for auto-reward distribution
 
-BUY_REBELLION_POINTS = 50 #cost in points
+
+BUY_REBELLION_POINTS = 61 #cost in points
 BUY_REBELLION_TOKENS = 1 #tokens earned for the points
-BUY_SPS_POINTS = 25 # point cost to purchase sps
+BUY_SPS_POINTS = 22 # point cost to purchase sps
 BUY_SPS_TOKENS = 40 #sps earned 
 BUY_DEC_POINTS = 15 #point cost to purchase dec
 BUY_DEC_TOKENS = 1000 #tokens earned for the points
+BUY_CHAOS_POINTS = 15 # cost in points
+BUY_CHAOS_TOKENS = 1 #tokens earned
 
 intents = discord.Intents.default()
 intents.members = True
@@ -151,14 +154,20 @@ async def display_rewards(ctx):
     o1 = f'Reward account has the following rewards available:\n'
     o2 = printAccountBalances(R_NAME) + '\n'
     o3 = f'Rebellion Packs cost {BUY_REBELLION_POINTS} points for {BUY_REBELLION_TOKENS} {tknRebellionPacks[1]}\n'
-    o4 = f'SPS tokens cost {BUY_SPS_POINTS} points for {BUY_SPS_TOKENS} {tknSPS[1]}\n'
-    o5 = f'DEC tokens cost {BUY_DEC_POINTS} points for {BUY_DEC_TOKENS} {tknDEC[1]}\n'
-    await message_splicer_sender(ctx,o1+o2+o3+o4+o5)
+    o4 = f'Chaos Packs cost {BUY_CHAOS_POINTS} points for {BUY_CHAOS_TOKENS} {tknChaosPacks[1]}\n'
+    o5 = f'SPS tokens cost {BUY_SPS_POINTS} points for {BUY_SPS_TOKENS} {tknSPS[1]}\n'
+    o6 = f'DEC tokens cost {BUY_DEC_POINTS} points for {BUY_DEC_TOKENS} {tknDEC[1]}\n'
+    await message_splicer_sender(ctx,o1+o2+o3+o4+o5+o6)
 
 @bot.command(name='buy_Rebellion', help='{} Purchase a Rebellion pack with points.')
 async def buy_Rebellion(ctx):
     discordName = ctx.author.name
     await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_REBELLION_POINTS, tknRebellionPacks[0], BUY_REBELLION_TOKENS))
+
+@bot.command(name='buy_Chaos', help='{} Purchase a Chaos pack with points.')
+async def buy_Chaos(ctx):
+    discordName = ctx.author.name
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_CHAOS_POINTS, tknChaosPacks[0], BUY_CHAOS_TOKENS))
 
 @bot.command(name='buy_SPS', help='{} Purchase SPS with points.')
 async def buy_SPS(ctx):
@@ -230,7 +239,7 @@ async def message_splicer_sender(ctx, msg):
                 x=0
                 await ctx.send('\n'.join(m))
                 m = []
-        if m != []:
+        if m != [] and m != ['']:
             await ctx.send('\n'.join(m)) #send leftovers if they exist
 
 #error handling
