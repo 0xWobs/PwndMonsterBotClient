@@ -80,7 +80,7 @@ def calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl
     fray_bonus = 0
     if brawl == 6:
         fray_bonus = tier3_bonus[str(fray)]        
-    elif brawl == 8:
+    elif brawl == 7:
         #TODO need to check this!! not sure this is corrrect
         fray_bonus = tier4_bonus[str(fray)]
     else:

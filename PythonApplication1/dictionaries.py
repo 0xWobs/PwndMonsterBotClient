@@ -25,7 +25,8 @@ ign_d = {
     'datafreak' : '<@728568906834378793>',
     'hajime001' : '<@809287895969169408>',
     'colnelangus' : '<@463907572806713345>',
-    'thebusycat' : '<@745051200436699177>'
+    'thebusycat' : '<@745051200436699177>',
+    'bigpalnet' : '<@0>'
     }
 
 #dictionary to go from discord name to in game name
@@ -55,7 +56,8 @@ d_ign = {
     'magustenebrae' : 'magus-tenebrae' ,
     'colnelangus' : 'colnelangus' ,
     'TBC' : 'thebusycat' ,
-    '.miks12' : 'sofia06'
+    '.miks12' : 'sofia06',
+    'tempBIGPALNET' : 'bigpalnet'
     }
 
 #remember!! Frays are indexed at 0! so Fray 1 in SPL is 0 here
