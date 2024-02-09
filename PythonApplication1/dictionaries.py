@@ -30,7 +30,7 @@ ign_d = {
 
 #dictionary to go from discord name to in game name
 d_ign = {
-    'Nwb071980' : 'nwb0719' ,
+    'nwb0719' : 'nwb0719' ,
     '.demon19.' : 'demon19' ,
     'anandkj611' : 'playtoearn1992' ,
     '.dben' : 'plebdev' ,
