@@ -9,7 +9,6 @@ from beem.transactionbuilder import TransactionBuilder
 from beembase.operations import Custom_json
 from helper import *
 from dictionaries import ign_d
-from dictionaries import d_ign
 from dictionaries import tier3_bonus
 from dictionaries import tier4_bonus
 

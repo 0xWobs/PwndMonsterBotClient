@@ -25,7 +25,7 @@ def add_points(ctx, user, points, memo):
     if points == 0:
         return(f'{memo}Did not add or modify any points. Point value 0.')
 
-    name = grab_user_name(ctx, user)
+    name = d_ign[user]
     if name == '-1':
         return(f'{memo}Could not locate username {user} in the guild. Nothing changed.')
     #check to see if user exists
@@ -61,11 +61,11 @@ def add_points(ctx, user, points, memo):
             return (log(f'{memo}Successfully added new user {name} with initial point value {points}'))
     return (log(f'{memo}Failed to add points. Should not get here. {user} {points}'))
 
-def check_User_Points_Balance(ctx, name, pointsRequested):
-    userPoints = get_User_Points(ctx, name)
-    if userPoints >= pointsRequested:
-        return True
-    return False
+#def check_User_Points_Balance(ctx, name, pointsRequested):
+#    userPoints = get_User_Points(ctx, name)
+#    if userPoints >= pointsRequested:
+#        return True
+#    return False
 
 # returns the entire balances.txt file as a string
 def display_points_all():
@@ -74,13 +74,12 @@ def display_points_all():
         for line in f.readlines():
             name = line.replace('\n','').split(',')[0]
             point = line.replace('\n','').split(',')[1]
-            ign = swap_discord_name_for_ign(name)
-            output = output + (f'{ign} has {point} points.\n')
+            output = output + (f'{name} has {point} points.\n')
         return output
 
 #returns a specific users point value from the file
-def get_User_Points(ctx, user):
-    name = grab_user_name(ctx, user)
+#name here is in game name
+def get_User_Points(ctx, name):
     with open(b_file) as f:
          for line in f.readlines():
              if name in line:
@@ -90,13 +89,12 @@ def get_User_Points(ctx, user):
 
 # returns a specific users points value
 def display_points(ctx, user):
-    point = get_User_Points(ctx,user)
+    name = d_ign[user]
+    point = get_User_Points(ctx, name)
     if point < 0:
         return (f'Could not find {name} in the balances file.')
     else:
-        name = grab_user_name(ctx, user)
-        ign = swap_discord_name_for_ign(name)
-        return f'{ign} has {point} points.'
+        return f'{name} has {point} points.'
     
 
 #display lines number of lines from the change log
@@ -110,7 +108,7 @@ def display_log(lines):
 
 #display lines number of lines from the change log, only for specified user
 def display_log_user(ctx, user, lines):
-    name = grab_user_name(ctx, user)
+    name = d_ign[user]
     if name == '-1':
         return(f'Could not locate username {user} in the guild. Nothing changed.')
     
@@ -178,35 +176,23 @@ def checkBrawl(ctx):
         return 'No brawl cycle information stored. Add the most recent brawl to fix.'
 
 #helper function to check and see if a user exists in the Balances file
-#user is user NAME not the discord tag number
-def user_exist(user):
+#user is user NAME - in game name not the discord tag number
+def user_exist(name):
     with open(b_file) as f:
-        if user in f.read():
+        if name in f.read():
             return True # found the name, it exists
     return False # name does not exist
 
-#helper function to grab the user's NAME from the context using the discord tag
-def grab_user_name(ctx, user):
-    #if the name is already the user name in the file, do nothing
-    if user_exist(user):
-        return user
-    else:
-        #if the name is the discord id, pull the discord name 
-        for m in ctx.guild.members:
-            if str(m.id) in user:
-                return m.name
-    return '-1'
-
 #helper function to switch from the discord name to the in game name
 #if it cannot find the name in the dictionary, just returns the discord name back
-def swap_discord_name_for_ign(discord_name):
-    if(discord_name == BRAWL_CYCLE_NAME):
-        return BRAWL_CYCLE_NAME
-    else:
-        ign = d_ign[discord_name]
-        if ign ==  '':
-            ign = discord_name #if we cant find in game name, replace with name
-        return ign
+#def swap_discord_name_for_ign(discord_name):
+#    if(discord_name == BRAWL_CYCLE_NAME):
+#        return BRAWL_CYCLE_NAME
+#    else:
+#        ign = d_ign[discord_name]
+#        if ign ==  '':
+#            ign = discord_name #if we cant find in game name, replace with name
+#        return ign
 
 #helper function to switch from the in game name to the discord PING name 
 #if it cannot find the name in the dictionary, does nothing

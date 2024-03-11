@@ -161,23 +161,27 @@ async def display_rewards(ctx):
 
 @bot.command(name='buy_Rebellion', help='{} Purchase a Rebellion pack with points.')
 async def buy_Rebellion(ctx):
-    discordName = ctx.author.name
-    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_REBELLION_POINTS, tknRebellionPacks[0], BUY_REBELLION_TOKENS))
+    user = f'<@{ctx.author.id}>'
+    name = d_ign[user]
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, user, name, BUY_REBELLION_POINTS, tknRebellionPacks[0], BUY_REBELLION_TOKENS))
 
 @bot.command(name='buy_Chaos', help='{} Purchase a Chaos pack with points.')
 async def buy_Chaos(ctx):
-    discordName = ctx.author.name
-    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_CHAOS_POINTS, tknChaosPacks[0], BUY_CHAOS_TOKENS))
+    user = f'<@{ctx.author.id}>'
+    name = d_ign[user]
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, user, name, BUY_CHAOS_POINTS, tknChaosPacks[0], BUY_CHAOS_TOKENS))
 
 @bot.command(name='buy_SPS', help='{} Purchase SPS with points.')
 async def buy_SPS(ctx):
-    discordName = ctx.author.name
-    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_SPS_POINTS, tknSPS[0], BUY_SPS_TOKENS))
+    user = f'<@{ctx.author.id}>'
+    name = d_ign[user]
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, user, name, BUY_SPS_POINTS, tknSPS[0], BUY_SPS_TOKENS))
 
 @bot.command(name='buy_DEC', help='{} Purchase DEC with points.')
 async def buy_DEC(ctx):
-    discordName = ctx.author.name
-    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, discordName, swap_discord_name_for_ign(discordName), BUY_DEC_POINTS, tknDEC[0], BUY_DEC_TOKENS)) 
+    user = f'<@{ctx.author.id}>'
+    name = d_ign[user]
+    await message_splicer_sender(ctx, await purchaseToken(ctx, R_NAME, R_ACTIVE, user, name, BUY_DEC_POINTS, tknDEC[0], BUY_DEC_TOKENS)) 
 
 #generic method to handle point deduction and token transfer for any purchases
 #ctx - the discord context
@@ -190,7 +194,7 @@ async def buy_DEC(ctx):
 #tokenAmount - the SPL token amount to send
 async def purchaseToken(ctx, rewName, rewActive, discordName, splName, pointSpent, tokenName, tokenAmount):
     # check user Points Available
-    userPoints = get_User_Points(ctx, discordName)
+    userPoints = get_User_Points(ctx, splName)
     if userPoints < pointSpent:
         return f'User {discordName} does not have enough points available to purchase {tokenName}. You have {userPoints}, you need {pointSpent} for this purchase. No changes made.'
 
