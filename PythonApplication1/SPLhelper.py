@@ -43,7 +43,7 @@ def recordBrawl(ctx, cycle, toAdd):
         #iterate through players and record results
         for p in jsonData['players']:
             battles_entered = p['entered_battles']
-            wins = p['wins']
+            wins = p['wins'] + p['auto_wins']
             losses = p['losses']
             draws = p['draws']
             name = p['player']
