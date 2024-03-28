@@ -49,6 +49,10 @@ def recordBrawl(ctx, cycle, toAdd):
             name = p['player']
             fray = p['fray_index']
             brawl = p['brawl_level']
+
+            if p['player'] == 'datafreak': #skip points for alt accounts
+                output.append('datafreak skipped.')
+                continue
             output.append(calculatePoints(ctx, name, battles_entered, wins, losses, draws, fray, brawl, cycle, toAdd))
     except Exception as e:
         return f'Error trying to find the brawl data from /tournaments/find_brawl records! \n {e}'
