@@ -208,12 +208,12 @@ async def purchaseToken(ctx, rewName, rewActive, discordName, splName, pointSpen
         return f'{o1}\n{o2}'
 
     # if both checks passed, proceed with purchase.
-    await ctx.send(f'{discordName} is spending  {pointSpent} points to send {tokenAmount} {tokenName} to Splinterlands account: {splName}\nType "yes" to confirm.\nType anything else, or wait 20 seconds, to cancel.')
+    await ctx.send(f'{discordName} is spending  {pointSpent} points to send {tokenAmount} {tokenName} to Splinterlands account: {splName}\nType "yes" or "Yes" or "YES" to confirm.\nType anything else, or wait 20 seconds, to cancel.')
     def check(m):
         return m.author == ctx.author #inline function to make sure no OTHER user can interrupt the purchase
     try:
         msg = await bot.wait_for('message', timeout=20.0, check=check)
-        if msg.content == 'yes':
+        if msg.content == 'yes' or msg.content == 'Yes' or msg.content == 'YES':
             #confirmation received, deduct points and broadcast transaction
             output = add_points(ctx, discordName, pointSpent *-1, f'{discordName} is purchasing {tokenName} with {pointSpent} points.')
             output2 = tokenTransfer(rewName, rewActive, splName, tokenName, tokenAmount)
